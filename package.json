@@ -1,9 +1,9 @@
 {
   "name": "tetrashop",
   "version": "1.0.0",
-  "description": "تتورشاپ - فروشگاه آنلاین",
+  "type": "module",
   "scripts": {
-    "build": "echo '🛍️ Tetrashop - Build completed successfully!'",
-    "dev": "echo 'Run: python3 -m http.server 3000'"
+    "build": "echo 'Build completed'",
+    "dev": "echo 'Development mode'"
   }
 }

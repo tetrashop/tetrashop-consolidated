@@ -5,104 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تتورشاپ - فروشگاه آنلاین</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            font-family: Tahoma, Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             direction: rtl;
-            color: white;
         }
         .container {
-            background: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,0.1);
             padding: 3rem;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-            color: #333;
+            backdrop-filter: blur(10px);
+            max-width: 500px;
         }
         h1 {
-            color: #2d3748;
-            margin-bottom: 1rem;
             font-size: 2.5rem;
-        }
-        .success {
-            color: #38a169;
-            font-weight: bold;
-            font-size: 1.3rem;
-            margin: 1rem 0;
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        .feature {
-            background: #f7fafc;
-            padding: 1rem;
-            border-radius: 10px;
-            border-left: 4px solid #4299e1;
+            margin-bottom: 1rem;
         }
         button {
-            background: #4299e1;
-            color: white;
+            background: #fff;
+            color: #667eea;
             border: none;
-            padding: 15px 40px;
+            padding: 15px 30px;
             border-radius: 10px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s;
-            margin: 0.5rem;
-        }
-        button:hover {
-            background: #3182ce;
-            transform: translateY(-2px);
+            margin-top: 2rem;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🛍️ تتورشاپ</h1>
-        <p class="success">✅ سایت با موفقیت راه‌اندازی شد</p>
-        <p>فروشگاه آنلاین تتورشاپ - اولین فروشگاه آنلاین شما</p>
-        
-        <div class="features">
-            <div class="feature">🚚 ارسال سریع</div>
-            <div class="feature">💰 قیمت مناسب</div>
-            <div class="feature">🔒 پرداخت امن</div>
-            <div class="feature">📞 پشتیبانی 24/7</div>
-        </div>
-
-        <div>
-            <button onclick="showAlert('ورود')">ورود به فروشگاه</button>
-            <button onclick="showAlert('ثبت نام')" style="background: #38a169;">ثبت نام</button>
-        </div>
-        
-        <div style="margin-top: 2rem; padding: 1rem; background: #edf2f7; border-radius: 10px;">
-            <p style="color: #4a5568; font-size: 0.9rem;">
-                آدرس: <strong id="currentUrl"></strong><br>
-                وضعیت: <span style="color: #38a169;">● آنلاین</span>
-            </p>
-        </div>
+        <p>فروشگاه آنلاین - راه‌اندازی شد</p>
+        <p>✅ Cloudflare Pages - کاملاً رایگان</p>
+        <button onclick="alert('به زودی فعال می‌شود!')">ورود به فروشگاه</button>
     </div>
-
-    <script>
-        // نمایش آدرس فعلی
-        document.getElementById('currentUrl').textContent = window.location.hostname;
-        
-        function showAlert(action) {
-            alert(`سیستم ${action} به زودی فعال می‌شود! 🚀`);
-        }
-        
-        // لاگ برای بررسی
-        console.log('✅ تتورشاپ - Cloudflare Pages - Active');
-        console.log('📍 آدرس:', window.location.href);
-    </script>
 </body>
 </html>
