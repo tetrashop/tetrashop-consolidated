@@ -8,9 +8,9 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build", 
-    "deploy": "turbo run deploy"
+    "dev": "cd apps/web && npm run dev",
+    "build": "cd apps/web && npm run build",
+    "start": "cd apps/web && npm run start"
   },
   "description": "Tetrashop Monorepo - Consolidated project structure",
   "keywords": ["tetrashop", "monorepo", "ecommerce"],
