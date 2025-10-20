@@ -1,9 +1,8 @@
 {
-  "name": "tetrashop",
+  "name": "tetrashop-static",
   "version": "1.0.0",
-  "type": "module",
+  "description": "Tetrashop Static Site",
   "scripts": {
-    "build": "echo 'Build completed'",
-    "dev": "echo 'Development mode'"
+    "build": "echo 'Static site ready for Cloudflare Pages'"
   }
 }

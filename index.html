@@ -3,52 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تتورشاپ - فروشگاه آنلاین</title>
+    <title>تتورشاپ - فعال شد</title>
     <style>
         body {
             margin: 0;
-            padding: 2rem;
-            font-family: Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            min-height: 100vh;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
             direction: rtl;
         }
-        .container {
-            background: rgba(255,255,255,0.1);
+        .card {
+            background: white;
             padding: 3rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
             max-width: 500px;
         }
         h1 {
-            font-size: 2.5rem;
+            color: #1a202c;
             margin-bottom: 1rem;
         }
+        .success {
+            color: #38a169;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
         button {
-            background: #fff;
-            color: #667eea;
+            background: #4299e1;
+            color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-size: 1.1rem;
             cursor: pointer;
-            margin-top: 2rem;
-            font-weight: bold;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🛍️ تتورشاپ</h1>
-        <p>فروشگاه آنلاین - راه‌اندازی شد</p>
-        <p>✅ Cloudflare Pages - کاملاً رایگان</p>
-        <button onclick="alert('به زودی فعال می‌شود!')">ورود به فروشگاه</button>
+    <div class="card">
+        <h1>🎉 تتورشاپ</h1>
+        <p class="success">✅ سایت با موفقیت راه‌اندازی شد</p>
+        <p>فروشگاه آنلاین تتورشاپ آماده است</p>
+        <button onclick="alert('خوش آمدید! 🛍️')">ورود به فروشگاه</button>
+        <p style="margin-top: 2rem; font-size: 0.9rem; color: #718096;">
+            میزبانی: Cloudflare Pages<br>
+            وضعیت: فعال
+        </p>
     </div>
 </body>
 </html>
