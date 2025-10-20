@@ -1,10 +1,187 @@
 <!DOCTYPE html>
-<html>
+<html dir="rtl" lang="fa">
 <head>
-    <title>تتورشاپ - امن</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تتورشاپ - فروشگاه تعاملی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            direction: rtl;
+            padding: 1rem;
+        }
+        .game-container {
+            background: rgba(255,255,255,0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        .living-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .living-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .product-card {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: right;
+        }
+        .product-card:hover {
+            transform: translateY(-3px);
+            border-color: #4299e1;
+            box-shadow: 0 8px 20px rgba(66, 153, 225, 0.2);
+        }
+        .score-display {
+            background: #f7fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #38a169;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-    <h1>✅ سایت امن راه‌اندازی شد</h1>
-    <p>توکن محافظت شد</p>
+    <div class="game-container">
+        <h1 style="
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        ">🎮 تتورشاپ تعاملی</h1>
+        
+        <p style="color: #666; margin-bottom: 1.5rem;">هر کلیک یک تجربه لذت‌بخش!</p>
+        
+        <button class="living-button" onclick="addToCart()">
+            🛒 افزودن به سبد خرید
+        </button>
+        
+        <div style="margin: 1.5rem 0;">
+            <div class="product-card" onclick="selectProduct('🎮 کنسول بازی', 8500000)">
+                <h3>🎮 کنسول بازی</h3>
+                <p>۸,۵۰۰,۰۰۰ تومان</p>
+                <small>کلیک کن و ببین!</small>
+            </div>
+            <div class="product-card" onclick="selectProduct('🎧 هدفون حرفه‌ای', 1200000)">
+                <h3>🎧 هدفون حرفه‌ای</h3>
+                <p>۱,۲۰۰,۰۰۰ تومان</p>
+                <small>لمسش کن!</small>
+            </div>
+            <div class="product-card" onclick="selectProduct('⌨️ کیبورد مکانیکی', 900000)">
+                <h3>⌨️ کیبورد مکانیکی</h3>
+                <p>۹۰۰,۰۰۰ تومان</p>
+                <small>امتحانش کن!</small>
+            </div>
+        </div>
+        
+        <div class="score-display" id="scoreDisplay">
+            🏆 امتیاز شما: <span id="score">۰</span>
+        </div>
+        
+        <p style="color: #718096; font-size: 0.8rem; margin-top: 1rem;">
+            با هر تعامل امتیاز بگیر و از تجربه لذت ببر!
+        </p>
+    </div>
+
+    <script>
+        let score = 0;
+        let clickCount = 0;
+        
+        function addToCart() {
+            score += 10;
+            clickCount++;
+            updateScore();
+            animateButton(event.target);
+            showNotification('🎉 آیتم به سبد اضافه شد! +۱۰ امتیاز');
+        }
+        
+        function selectProduct(productName, price) {
+            score += 5;
+            clickCount++;
+            updateScore();
+            animateCard(event.target);
+            showNotification(`🎊 ${productName} انتخاب شد! +۵ امتیاز`);
+        }
+        
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            
+            // تغییر رنگ پس از ۳ کلیک
+            if (clickCount >= 3) {
+                document.getElementById('scoreDisplay').style.background = 
+                    'linear-gradient(45deg, #ffd89b, #19547b)';
+                document.getElementById('scoreDisplay').style.color = 'white';
+            }
+        }
+        
+        function animateButton(button) {
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 150);
+        }
+        
+        function animateCard(card) {
+            card.style.background = '#f0fff4';
+            setTimeout(() => {
+                card.style.background = 'white';
+            }, 300);
+        }
+        
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+    </script>
 </body>
 </html>
