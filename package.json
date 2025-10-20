@@ -1,20 +1,8 @@
 {
-  "name": "tetrashop-monorepo",
+  "name": "tetrashop-static",
   "version": "1.0.0",
-  "type": "module",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
-    "dev": "cd apps/web && npm run dev",
-    "build": "cd apps/web && npm run build",
-    "start": "cd apps/web && npm run start",
-    "cloudflare-build": "cd apps/web && npm run build"
-  },
-  "description": "Tetrashop Monorepo - Consolidated project structure",
-  "keywords": ["tetrashop", "monorepo", "ecommerce"],
-  "author": "Tetrashop Team",
-  "license": "MIT"
+    "build": "echo 'Static site built successfully'",
+    "dev": "echo 'Run: python3 -m http.server 8080'"
+  }
 }
