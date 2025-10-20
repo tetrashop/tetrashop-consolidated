@@ -1,14 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  compress: true,
-  poweredByHeader: false,
-  experimental: {
-    optimizeCss: true,
-  },
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
-    domains: ['assets.tetrashop.com'],
-  },
+    unoptimized: true
+  }
 }
 
 module.exports = nextConfig
