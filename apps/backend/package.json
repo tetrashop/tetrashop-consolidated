@@ -1,10 +1,13 @@
 {
-  "name": "@tetrashop/backend", 
-  "version": "1.0.0",
+  "name": "@tetrashop/backend",
+  "version": "1.0.0", 
   "type": "module",
   "scripts": {
     "dev": "node server.js",
     "build": "echo 'Backend build complete'",
     "start": "node server.js"
+  },
+  "dependencies": {
+    "@vercel/node": "^2.0.0"
   }
 }

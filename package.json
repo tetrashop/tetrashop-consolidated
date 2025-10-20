@@ -2,13 +2,18 @@
   "name": "tetrashop-monorepo",
   "version": "1.0.0",
   "type": "module",
+  "private": true,
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build",
+    "build": "turbo run build", 
     "deploy": "turbo run deploy"
-  }
+  },
+  "description": "Tetrashop Monorepo - Consolidated project structure",
+  "keywords": ["tetrashop", "monorepo", "ecommerce"],
+  "author": "Tetrashop Team",
+  "license": "MIT"
 }
