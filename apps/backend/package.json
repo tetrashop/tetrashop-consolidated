@@ -1,5 +1,10 @@
 {
-  "name": "tetrashop-backend",
+  "name": "@tetrashop/backend", 
   "version": "1.0.0",
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "echo 'Backend build complete'",
+    "start": "node server.js"
+  }
 }
