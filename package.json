@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "cd apps/web && npm run dev",
     "build": "cd apps/web && npm run build",
-    "start": "cd apps/web && npm run start"
+    "start": "cd apps/web && npm run start",
+    "cloudflare-build": "cd apps/web && npm run build"
   },
   "description": "Tetrashop Monorepo - Consolidated project structure",
   "keywords": ["tetrashop", "monorepo", "ecommerce"],

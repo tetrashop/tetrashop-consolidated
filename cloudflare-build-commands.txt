@@ -1,0 +1,9 @@
+# Cloudflare Pages Build Commands - Try these:
+
+1. PRIMARY: cd apps/web && npm run build
+2. ALTERNATIVE: cd apps/web && npx next build
+3. FALLBACK: ./build.sh
+4. SIMPLE: npm run build
+
+# Build Output Directory: apps/web/.next
+# Node Version: 18
