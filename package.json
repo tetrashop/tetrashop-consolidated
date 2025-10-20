@@ -1,8 +1,9 @@
 {
-  "name": "tetrashop-static",
+  "name": "tetrashop",
   "version": "1.0.0",
+  "description": "تتورشاپ - فروشگاه آنلاین",
   "scripts": {
-    "build": "echo 'Static site built successfully'",
-    "dev": "echo 'Run: python3 -m http.server 8080'"
+    "build": "echo '🛍️ Tetrashop - Build completed successfully!'",
+    "dev": "echo 'Run: python3 -m http.server 3000'"
   }
 }
