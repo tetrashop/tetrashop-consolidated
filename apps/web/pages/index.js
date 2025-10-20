@@ -1,30 +1,33 @@
-import React from 'react'
-
 export default function Home() {
   return (
-    <div style={{ 
-      padding: '2rem', 
-      textAlign: 'center',
-      fontFamily: 'Arial, sans-serif',
-      direction: 'rtl'
-    }}>
-      <h1>🛍️ تتورشاپ - فروشگاه آنلاین</h1>
-      <p>با Cloudflare Pages راه‌اندازی شد ✅</p>
-      <div style={{ marginTop: '2rem' }}>
-        <button style={{
-          padding: '10px 20px',
-          backgroundColor: '#0070f3',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer'
-        }}>
-          شروع خرید
-        </button>
-      </div>
-      <footer style={{ marginTop: '3rem', fontSize: '0.9rem', color: '#666' }}>
-        آدرس: https://tetrashop.pages.dev
-      </footer>
-    </div>
+    <html dir="rtl">
+      <head>
+        <title>تتورشاپ - فروشگاه آنلاین</title>
+        <meta charSet="utf-8" />
+      </head>
+      <body style={{ 
+        margin: 0, 
+        padding: '2rem', 
+        fontFamily: 'Arial, sans-serif',
+        textAlign: 'center',
+        direction: 'rtl'
+      }}>
+        <h1>🛍️ تتورشاپ</h1>
+        <p>فروشگاه آنلاین - به زودی...</p>
+        <div style={{ marginTop: '2rem' }}>
+          <button style={{
+            padding: '10px 20px',
+            backgroundColor: '#28a745',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: '16px'
+          }}>
+            ورود به فروشگاه
+          </button>
+        </div>
+      </body>
+    </html>
   )
 }
