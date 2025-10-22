@@ -1,0 +1,10 @@
+{
+  "system_name": "Tetrashop Unified System",
+  "version": "1.0.0",
+  "status": "active",
+  "components": {
+    "frontend": ["gateway", "shop", "admin"],
+    "backend": ["api", "services"],
+    "deployment": ["cloudflare"]
+  }
+}
