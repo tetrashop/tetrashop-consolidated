@@ -1,8 +1,16 @@
 {
-  "name": "tetrashop-static",
+  "name": "tetrashop-worker",
   "version": "1.0.0",
-  "description": "Tetrashop Static Site",
+  "description": "Tetrashop API Worker",
+  "main": "cloudflare-worker.js",
   "scripts": {
-    "build": "echo 'Static site ready for Cloudflare Pages'"
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "dependencies": {
+    "itty-router": "^4.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
   }
 }

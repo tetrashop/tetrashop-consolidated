@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>فروشگاه</title>
+</head>
+<body>
+    <h1>فروشگاه من</h1>
+    <button onclick="buy()">خرید محصول (29,000 تومان)</button>
+    <p>درآمد: <span id="money">0</span> تومان</p>
+    
+    <script>
+        async function buy() {
+            try {
+                const response = await fetch('http://localhost:3000/api/sell', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({})
+                });
+                const result = await response.json();
+                document.getElementById('money').textContent = result.total;
+                alert('خرید موفق! درآمد: ' + result.total + ' تومان');
+            } catch (error) {
+                alert('خطا! مطمئن شوید node money.js اجرا شده');
+            }
+        }
+        
+        // بروزرسانی خودکار آمار
+        setInterval(async () => {
+            try {
+                const response = await fetch('http://localhost:3000/api/stats');
+                const data = await response.json();
+                document.getElementById('money').textContent = data.totalRevenue;
+            } catch (e) {}
+        }, 2000);
+    </script>
+</body>
+</html>

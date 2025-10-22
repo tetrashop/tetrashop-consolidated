@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetrashop - سیستم فروش یکپارچه</title>
+    <style>
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .revenue-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00d4aa, #009174);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            z-index: 10000;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            min-width: 300px;
+        }
+        .product-btn {
+            background: white;
+            color: #333;
+            border: none;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .product-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .stats {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- پنل فروش -->
+    <div class="revenue-panel">
+        <h3 style="margin: 0 0 15px 0; text-align: center;">💰 فروش فوری</h3>
+        
+        <button class="product-btn" onclick="sellProduct(1)">
+            💎 عضویت طلایی - 29,000 تومان
+        </button>
+        <button class="product-btn" onclick="sellProduct(2)">
+            🛍️ قالب حرفه‌ای - 49,000 تومان
+        </button>
+        <button class="product-btn" onclick="sellProduct(3)">
+            📚 دوره آموزشی - 79,000 تومان
+        </button>
+        
+        <div class="stats">
+            <div>📊 فروش امروز: <span id="salesCount">0</span> مورد</div>
+            <div>💰 درآمد کل: <span id="totalRevenue">0</span> تومان</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>🚀 Tetrashop - سیستم فروش یکپارچه</h1>
+        <h3>فروشگاه شما با سیستم درآمدزایی فعال</h3>
+        
+        <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin: 20px 0;">
+            <h2>🎯 محصولات ما</h2>
+            <p>سیستم فروش در سمت راست صفحه فعال است. می‌توانید همین الان فروش را شروع کنید!</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px;">
+            <h2>📞 پشتیبانی</h2>
+            <p>در صورت نیاز به راهنمایی با ما در ارتباط باشید</p>
+        </div>
+    </div>
+
+    <script>
+        // تابع فروش محصول
+        async function sellProduct(productId) {
+            const products = {
+                1: { name: 'عضویت طلایی', price: 29000 },
+                2: { name: 'قالب حرفه‌ای', price: 49000 },
+                3: { name: 'دوره آموزشی', price: 79000 }
+            };
+            
+            const product = products[productId];
+            
+            if (confirm(`آیا مایل به خرید "${product.name}" به مبلغ ${product.price.toLocaleString()} تومان هستید؟`)) {
+                try {
+                    const response = await fetch('http://localhost:3000/api/sell', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ productId: productId })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        alert(`✅ خرید با موفقیت ثبت شد!\n\n📦 محصول: ${product.name}\n💵 مبلغ: ${product.price.toLocaleString()} تومان\n💰 درآمد کل: ${result.total.toLocaleString()} تومان`);
+                        updateStats();
+                    }
+                } catch (error) {
+                    alert('⚠️ خطا در اتصال به سیستم پرداخت. مطمئن شوید سرور درآمدزایی در حال اجراست.');
+                }
+            }
+        }
+        
+        // آپدیت آمار
+        async function updateStats() {
+            try {
+                const response = await fetch('http://localhost:3000/api/stats');
+                const data = await response.json();
+                
+                document.getElementById('salesCount').textContent = data.totalSales;
+                document.getElementById('totalRevenue').textContent = data.totalRevenue.toLocaleString();
+            } catch (error) {
+                console.log('خطا در دریافت آمار');
+            }
+        }
+        
+        // آپدیت اولیه آمار
+        updateStats();
+        
+        // آپدیت هر 10 ثانیه
+        setInterval(updateStats, 10000);
+        
+        console.log('🚀 سیستم درآمدزایی فعال شد!');
+    </script>
+</body>
+</html>

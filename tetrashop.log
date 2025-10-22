@@ -1,0 +1,14 @@
+🎯 Tetrashop Orchestrator running on: http://localhost:8080
+ * Serving Flask app 'tetrashop_orchestrator'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.1.102:8080
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [22/Oct/2025 11:54:16] "GET /api/system/status HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2025 11:54:16] "GET /api/system/status HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2025 11:54:26] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2025 11:54:41] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2025 11:54:56] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2025 11:55:11] "GET /health HTTP/1.1" 200 -

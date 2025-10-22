@@ -1,0 +1,26 @@
+{
+    "system_name": "Tetrashop Consolidated API",
+    "version": "1.0.0",
+    "description": "سیستم یکپارچه مدیریت فروشگاه تتراشاپ",
+    "services": {
+        "main_orchestrator": {
+            "port": 8080,
+            "health_endpoint": "/api/system/status",
+            "timeout": 30
+        },
+        "api_gateway": {
+            "type": "cloudflare_worker",
+            "cors_enabled": true,
+            "cache_enabled": false
+        },
+        "monitoring": {
+            "log_file": "tetrashop.log",
+            "health_check_interval": 60
+        }
+    },
+    "deployment": {
+        "supported_platforms": ["cloudflare_workers", "render", "ngrok"],
+        "primary_platform": "cloudflare_workers",
+        "backup_platform": "ngrok"
+    }
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تتراشاپ - سیستم فروش فعال</title>
+    <style>
+        body {
+            font-family: Tahoma;
+            margin: 20px;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .product-card {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            background: white;
+        }
+        .btn-success {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .btn-success:hover {
+            background: #218838;
+        }
+        .status-box {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            background: #e7f3ff;
+            border-right: 4px solid #007bff;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 تتراشاپ - سیستم فروش فعال</h1>
+        
+        <div class="status-box">
+            <strong>وضعیت سیستم:</strong>
+            <span id="connectionStatus">در حال بررسی...</span>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div>💰 درآمد کل</div>
+                <div id="totalRevenue" style="font-size: 24px; color: #28a745;">0 تومان</div>
+            </div>
+            <div class="stat-item">
+                <div>📦 تعداد فروش</div>
+                <div id="totalSales" style="font-size: 24px; color: #007bff;">0 مورد</div>
+            </div>
+        </div>
+
+        <!-- محصول ۱ -->
+        <div class="product-card">
+            <h3>💎 عضویت طلایی</h3>
+            <p>دسترسی کامل به تمام امکانات پیشرفته</p>
+            <div style="font-size: 20px; color: #28a745; margin: 15px 0;">29,000 تومان</div>
+            <button class="btn-success" onclick="makeSale(1)">خرید فوری</button>
+        </div>
+
+        <!-- محصول ۲ -->
+        <div class="product-card">
+            <h3>🛍️ قالب حرفه‌ای</h3>
+            <p>قالب آماده با طراحی مدرن و واکنش‌گرا</p>
+            <div style="font-size: 20px; color: #007bff; margin: 15px 0;">49,000 تومان</div>
+            <button class="btn-success" onclick="makeSale(2)">خرید فوری</button>
+        </div>
+
+        <!-- محصول ۳ -->
+        <div class="product-card">
+            <h3>📚 دوره آموزشی</h3>
+            <p>آموزش کامل توسعه وب و برنامه‌نویسی</p>
+            <div style="font-size: 20px; color: #6f42c1; margin: 15px 0;">79,000 تومان</div>
+            <button class="btn-success" onclick="makeSale(3)">خرید فوری</button>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-radius: 8px;">
+            <h3>💡 راهنمای عیب‌یابی</h3>
+            <p>اگر دکمه‌ها کار نمی‌کنند، مطمئن شوید:</p>
+            <ul>
+                <li>سرور درآمدزایی اجرا شده: <code>node revenue.js</code></li>
+                <li>پورت 3000 آزاد است</li>
+                <li>مرورگر به اینترنت متصل است</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // اطلاعات محصولات
+        const products = {
+            1: { name: 'عضویت طلایی', price: 29000 },
+            2: { name: 'قالب حرفه‌ای', price: 49000 },
+            3: { name: 'دوره آموزشی', price: 79000 }
+        };
+
+        // بررسی وضعیت اتصال
+        async function checkConnection() {
+            try {
+                const response = await fetch('http://localhost:3000/api/stats');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('connectionStatus').innerHTML = 
+                        '✅ سیستم درآمدزایی متصل است';
+                    document.getElementById('totalRevenue').textContent = 
+                        data.totalRevenue.toLocaleString() + ' تومان';
+                    document.getElementById('totalSales').textContent = 
+                        data.totalSales + ' مورد';
+                    return true;
+                }
+            } catch (error) {
+                document.getElementById('connectionStatus').innerHTML = 
+                    '❌ سیستم درآمدزایی در دسترس نیست. لطفا "node revenue.js" را اجرا کنید.';
+                return false;
+            }
+        }
+
+        // انجام فروش
+        async function makeSale(productId) {
+            const product = products[productId];
+            
+            if (!confirm(`آیا مایل به خرید "${product.name}" به مبلغ ${product.price.toLocaleString()} تومان هستید؟`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/sell', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        productId: productId,
+                        productName: product.name,
+                        price: product.price
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`خطای سرور: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(`✅ خرید با موفقیت ثبت شد!\n\n📦 ${product.name}\n💰 ${product.price.toLocaleString()} تومان\n🎯 درآمد کل: ${result.total.toLocaleString()} تومان`);
+                    // بروزرسانی آمار
+                    checkConnection();
+                } else {
+                    alert('❌ خطا در ثبت فروش');
+                }
+                
+            } catch (error) {
+                alert(`⚠️ خطا در ارتباط با سرور:\n${error.message}\n\nلطفا مطمئن شوید:\n1. node revenue.js اجرا شده\n2. پورت 3000 آزاد است`);
+                console.error('Error details:', error);
+            }
+        }
+
+        // بررسی اولیه اتصال
+        checkConnection();
+        
+        // بررسی دوره‌ی اتصال هر 5 ثانیه
+        setInterval(checkConnection, 5000);
+
+        console.log('🚀 سیستم تتراشاپ فعال شد');
+    </script>
+</body>
+</html>

@@ -1,61 +1,50 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="fa">
+<html dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تتورشاپ - فعال شد</title>
+    <title>فروشگاه من</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            direction: rtl;
-        }
-        .card {
-            background: white;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 500px;
-        }
-        h1 {
-            color: #1a202c;
-            margin-bottom: 1rem;
-        }
-        .success {
-            color: #38a169;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin: 1rem 0;
-        }
-        button {
-            background: #4299e1;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 1rem;
+        body { font-family: Tahoma; margin: 20px; }
+        button { 
+            background: green; color: white; 
+            padding: 15px; margin: 10px; border: none; 
+            border-radius: 5px; cursor: pointer; 
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>🎉 تتورشاپ</h1>
-        <p class="success">✅ سایت با موفقیت راه‌اندازی شد</p>
-        <p>فروشگاه آنلاین تتورشاپ آماده است</p>
-        <button onclick="alert('خوش آمدید! 🛍️')">ورود به فروشگاه</button>
-        <p style="margin-top: 2rem; font-size: 0.9rem; color: #718096;">
-            میزبانی: Cloudflare Pages<br>
-            وضعیت: فعال
-        </p>
-    </div>
+    <h1>🛍️ فروشگاه تست</h1>
+    <button onclick="sell()">🎯 خرید محصول (29,000 تومان)</button>
+    <p id="status">وضعیت: در حال بررسی...</p>
+    
+    <script>
+        async function sell() {
+            try {
+                const response = await fetch('http://localhost:3000/api/sell', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({})
+                });
+                const result = await response.json();
+                alert('✅ خرید موفق! درآمد: ' + result.total.toLocaleString() + ' تومان');
+                checkStatus();
+            } catch (error) {
+                alert('❌ خطا! مطمئن شوید revenue.js اجرا شده است');
+            }
+        }
+        
+        async function checkStatus() {
+            try {
+                const response = await fetch('http://localhost:3000/api/stats');
+                const data = await response.json();
+                document.getElementById('status').innerHTML = 
+                    '💰 درآمد کل: ' + data.total.toLocaleString() + ' تومان';
+            } catch (error) {
+                document.getElementById('status').innerHTML = 
+                    '❌ سیستم درآمدزایی وصل نیست';
+            }
+        }
+        checkStatus();
+    </script>
 </body>
 </html>

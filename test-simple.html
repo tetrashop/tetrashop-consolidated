@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تست سیستم درآمدزایی</title>
+    <style>
+        body { font-family: Tahoma; margin: 20px; }
+        button { 
+            background: green; color: white; 
+            padding: 15px 25px; margin: 10px; 
+            border: none; border-radius: 8px; 
+            cursor: pointer; font-size: 16px;
+        }
+        .status { padding: 15px; margin: 10px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>🎯 تست سیستم درآمدزایی</h1>
+    
+    <div>
+        <button onclick="testConnection()">🔗 تست اتصال</button>
+        <button onclick="makeSale()">💰 تست فروش</button>
+    </div>
+    
+    <div id="status" class="status">وضعیت: در حال بررسی...</div>
+    
+    <div>
+        <h3>📊 آمار زنده:</h3>
+        <p>درآمد کل: <span id="money">0</span> تومان</p>
+        <p>تعداد فروش: <span id="sales">0</span> مورد</p>
+    </div>
+
+    <script>
+        async function testConnection() {
+            const status = document.getElementById('status');
+            try {
+                status.innerHTML = '🔄 در حال اتصال...';
+                const response = await fetch('http://localhost:3000/api/stats');
+                const data = await response.json();
+                
+                status.className = 'status success';
+                status.innerHTML = '✅ سیستم درآمدزایی متصل است!';
+                
+                document.getElementById('money').textContent = data.totalRevenue.toLocaleString();
+                document.getElementById('sales').textContent = data.totalSales;
+            } catch (error) {
+                status.className = 'status error';
+                status.innerHTML = '❌ خطا در اتصال: ' + error.message;
+            }
+        }
+
+        async function makeSale() {
+            const status = document.getElementById('status');
+            try {
+                status.innerHTML = '🔄 در حال ثبت فروش...';
+                const response = await fetch('http://localhost:3000/api/sell', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ test: true })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    status.className = 'status success';
+                    status.innerHTML = '✅ فروش با موفقیت ثبت شد!';
+                    alert('🎉 فروش موفق!\n💰 درآمد کل: ' + data.total.toLocaleString() + ' تومان');
+                    testConnection(); // بروزرسانی آمار
+                }
+            } catch (error) {
+                status.className = 'status error';
+                status.innerHTML = '❌ خطا در فروش: ' + error.message;
+            }
+        }
+
+        // تست اولیه
+        testConnection();
+    </script>
+</body>
+</html>
